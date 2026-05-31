@@ -61,4 +61,4 @@ export async function deleteNote(req,res) {
     console.error("Error in deleteNote controller:", error);
     res.status(500).json({ message: "Internal server error" });
  }
-}
+} 
