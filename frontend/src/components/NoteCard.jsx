@@ -3,6 +3,7 @@ import { Link } from "react-router";
 import { formatDate } from "../lib/utils";
 import api from "../lib/axios";
 import toast from "react-hot-toast";
+import { CiCalendar } from "react-icons/ci";
 
 const NoteCard = ({ note, setNotes }) => {
   const handleDelete = async (e, id) => {
@@ -29,12 +30,15 @@ const NoteCard = ({ note, setNotes }) => {
       <div className="card-body">
         <h3 className="card-title text-base-content">{note.title}</h3>
         <p className="text-base-content/70 line-clamp-3">{note.content}</p>
-        <div className="card-actions justify-between items-center mt-4">
-          <span className="text-sm text-base-content/60">
-            {formatDate(new Date(note.createdAt))}
-          </span>
+        <div className="note-bottom card-actions justify-between items-center mt-4">
+          <div className="note-date flex justify-evenly items-center">
+            <CiCalendar />
+            <span className="text-sm text-base-content/60 display-flex">
+              {formatDate(new Date(note.createdAt))}
+            </span>
+            </div>
           <div className="flex items-center gap-1">
-            <PenSquareIcon className="size-4" />
+            <PenSquareIcon className="pen size-4" />
             <button
               className="btn btn-ghost btn-xs text-error"
               onClick={(e) => handleDelete(e, note._id)}

@@ -36,7 +36,7 @@ const NoteDetailPage = () => {
     try {
       await api.delete(`/notes/${id}`);
       toast.success("Note deleted");
-      navigate("/");
+      navigate("/myNotes");
     } catch (error) {
       console.log("Error deleting the note:", error);
       toast.error("Failed to delete note");
@@ -54,7 +54,7 @@ const NoteDetailPage = () => {
     try {
       await api.put(`/notes/${id}`, note);
       toast.success("Note updated successfully");
-      navigate("/");
+      navigate("/myNotes");
     } catch (error) {
       console.log("Error saving the note:", error);
       toast.error("Failed to update note");
@@ -72,11 +72,18 @@ const NoteDetailPage = () => {
   }
 
   return (
-    <div className="min-h-screen bg-base-200">
+    <div className="w-full
+      min-h-screen
+      flex
+      items-start
+      justify-center
+       bg-[var(--bg-color2)]
+       text-[var(--text-color1)]
+      ">
       <div className="container mx-auto px-4 py-8">
         <div className="max-w-2xl mx-auto">
           <div className="flex items-center justify-between mb-6">
-            <Link to="/" className="btn btn-ghost">
+            <Link to="/myNotes" className="btn btn-ghost">
               <ArrowLeftIcon className="h-5 w-5" />
               Back to Notes
             </Link>
@@ -86,16 +93,15 @@ const NoteDetailPage = () => {
             </button>
           </div>
 
-          <div className="card bg-base-100">
-            <div className="card-body">
+          <div className="card-body ntpg-card-body bg-base-100">
               <div className="form-control mb-4">
                 <label className="label">
-                  <span className="label-text">Title</span>
+                  <span className="label-text text-[var(--text-color1)]">Title</span>
                 </label>
                 <input
                   type="text"
                   placeholder="Note title"
-                  className="input input-bordered"
+                  className="input title-input input-bordered"
                   value={note.title}
                   onChange={(e) => setNote({ ...note, title: e.target.value })}
                 />
@@ -103,24 +109,23 @@ const NoteDetailPage = () => {
 
               <div className="form-control mb-4">
                 <label className="label">
-                  <span className="label-text">Content</span>
+                  <span className="label-text text-[var(--text-color1)]">Content</span>
                 </label>
                 <textarea
                   placeholder="Write your note here..."
-                  className="textarea textarea-bordered h-32"
+                  className="textarea content-input textarea-bordered h-32"
                   value={note.content}
                   onChange={(e) => setNote({ ...note, content: e.target.value })}
                 />
               </div>
 
               <div className="card-actions justify-end">
-                <button className="btn btn-primary" disabled={saving} onClick={handleSave}>
+                <button className="btn matt-effect butt  p-3 pr-5 pl-5" disabled={saving} onClick={handleSave}>
                   {saving ? "Saving..." : "Save Changes"}
                 </button>
               </div>
             </div>
           </div>
-        </div>
       </div>
     </div>
   );
