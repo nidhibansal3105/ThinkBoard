@@ -19,7 +19,7 @@ export async function getNoteById(req, res) {
     try {
         const { id } = req.params;
 
-        if (!mongoose.Types.ObjectId.isValid(id)) {
+        if (process.env.MONGO_URI && !mongoose.Types.ObjectId.isValid(id)) {
             return res.status(400).json({
                 message: "Invalid note id",
             });
@@ -77,7 +77,7 @@ export async function updateNote(req, res) {
         const { id } = req.params;
         const { title, content } = req.body;
 
-        if (!mongoose.Types.ObjectId.isValid(id)) {
+        if (process.env.MONGO_URI && !mongoose.Types.ObjectId.isValid(id)) {
             return res.status(400).json({
                 message: "Invalid note id",
             });
@@ -123,7 +123,7 @@ export async function deleteNote(req, res) {
     try {
         const { id } = req.params;
 
-        if (!mongoose.Types.ObjectId.isValid(id)) {
+        if (process.env.MONGO_URI && !mongoose.Types.ObjectId.isValid(id)) {
             return res.status(400).json({
                 message: "Invalid note id",
             });
@@ -147,9 +147,4 @@ export async function deleteNote(req, res) {
             message: "Internal server error",
         });
     }
-    res.status(200).json({message:"Note deleted successfully"});
- } catch (error) {
-    console.error("Error in deleteNote controller:", error);
-    res.status(500).json({ message: "Internal server error" });
- }
-} 
+}
