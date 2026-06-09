@@ -1,6 +1,226 @@
+@import url('https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+:root{
+    --bg-color1 :rgba(46, 39, 33, 0.431);
+    --bg-color2 :  #23291e;
+
+    --text-color1:rgb(150, 146, 146);
+    --text-color2:rgba(158, 116, 80, 0.774);
+    --text-color3:rgba(47, 41, 36, 0.774);
+    --text-color4:rgb(119, 115, 122);
+
+    --but-bg-color1 : rgb(207, 55, 13);
+    --but-bg-color2 :rgb(128, 128, 0);
+    --but-bg-color3 :rgb(62, 62, 23);
+    --but-bg-color4 :rgba(46, 39, 33, 0.774);
+    --but-bg-color5 :rgba(158, 116, 80, 0.774);
+    --but-bg-color6 :rgba(137, 122, 109, 0.774);
+}
+
+body{
+    background-color: var(--but-bg-color4);
+}
+
+
+/* home page -------------------------------------------------------------------------------------------------*/
+.home-page{
+    width: 100%;
+    height: 100vh;
+    color: var(--text-color);
+    background-image: url("../assets/back.avif");
+    background-size:cover;
+    background-position: 0; 
+}
+
+.overlay-home{
+    width: 100%;
+    height: 100vh;
+    background: linear-gradient(
+        rgba(0, 0, 0, 0.741),
+        rgba(0, 0, 0, 0.601),
+        rgba(0, 0, 0, 0.423)
+    );
+    backdrop-filter: blur(3.5px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.home-page h3{
+    font-size: 6rem;
+    letter-spacing: 3.5rem;
+    color: var(--text-color1);
+    font-family: "Black Ops One";
+    padding-left: 3rem;
+    font-weight: 400;
+    text-shadow: 1px 1px 0 #999,
+                 2px 2px 0 #888,
+                 3px 3px 0 #777;
+}
+
+.home-button{
+    width: 100%;
+    height: 20%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+#new-note, #my-note{
+    width: 10rem;
+    height: 2.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 600;
+    border-radius: 2.5rem;
+    background-color: var(--but-bg-color1);
+}
+
+#new-note:hover, 
+#my-note:hover{
+    border: 3px solid var(--but-bg-color3);
+    color: var(--but-bg-color3);
+    background-color: rgba(255, 255, 255, 0.328);
+}
+
+
+
+/* my notes-------------------------------------------------------------------------------------------------*/
+.my-note-bg{
+    width:100%;
+    min-height:100vh;   
+    background:
+    radial-gradient(circle at 30% 30%, #ff8f3c 0%, transparent 35%),
+    radial-gradient(circle at 80% 70%, #5f6f52 0%, transparent 40%),
+    linear-gradient(135deg, #23291e, #38452e);  
+    display:flex;
+    align-items:flex-start;
+    justify-content:center;
+}
+.overlay-my-note{
+    width:95vw;
+    min-height:93%;
+    margin-bottom: 3rem;
+    border-radius:50px;
+
+    background:rgba(255,255,255,0.04);
+
+    backdrop-filter:blur(12px);
+    -webkit-backdrop-filter:blur(12px);
+
+    border:1px solid rgba(255,255,255,0.08);
+
+    box-shadow:
+    inset 0 1px 1px rgba(255,255,255,0.1),
+    0 25px 50px rgba(0,0,0,0.25);
+
+    padding:50px;
+}
+
+
+.pill-btn{
+    width: 3rem;
+    height: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    color: var(--text-color2);
+
+    border-radius: 50%;
+
+    position: relative;
+    top: -30px;
+    left: -30px;
+}
+
+.matt-effect{
+    background:
+        linear-gradient(
+            145deg,
+            rgba(120,145,80,0.35),
+            rgba(90,110,55,0.15)
+        );
+
+    backdrop-filter: blur(20px);
+
+    box-shadow:
+        inset 2px 2px 3px rgba(255,255,255,0.15),
+        inset -8px -8px 15px rgba(0,0,0,0.15),
+        0 10px 30px rgba(0,0,0,0.15);
+    border: none;
+    color: var(--but-bg-color3);
+}
+
+.butt{
+    border-radius: 2.5rem;
+    color: var(--text-color4);
+    font-weight: 800;
+}
+
+.butt:hover{
+    color: var(--text-color1);
+}
+.notebook-icon{
+    color: var(--but-bg-color5);
+}
+
+.card{
+    border: 0.01px solid rgb(72, 72, 1);
+    background-color: rgba(41, 41, 0, 0.406);
+    box-shadow: 
+    3px 3px 10px rgba(0, 0, 0, 0.594);
+}
+
+.del{
+    width: 1rem;
+    height: 1rem;
+    border:1px solid rgb(207, 55, 13);
+    border-radius: 50%;
+}
+
+.note-bottom{
+    border-top: 1px solid rgba(49, 49, 1, 0.687);
+    padding-top: 1.5rem;
+}
+
+/* noteDetail----------------------------------------------------------------------------------------------------- */
+.save-butt{
+    color: var(--but-bg-color6);
+}
+
+.ntpg-card-body{
+    background-color: var(--bg-color2);
+    border: none;
+    border-radius: 2rem;
+    box-shadow: 
+        -3px -3px 13px #4c58458a,
+        7px 7px 6px  rgba(0, 0, 0, 0.33);
+}
+.title-input, .content-input{
+    padding: 1rem;
+    border: none;
+    background-color: var(--bg-color2);
+    border-radius: 2.5rem;
+    box-shadow: 
+    inset 5px 5px 5px rgba(0, 0, 0, 0.426),
+    inset -4px -4px 5px #4c58458a;
+}
+
+.title-input::placeholder, 
+.content-input::placeholder{
+    color: var(--text-color1);
+}
+
+.no-notes-but{
+    color: var(--text-color3);
+}
 
 /* Loading spinner background */
 .loading-bg-light {

@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { formatDate } from "../lib/utils";
 import api from "../lib/axios";
 import toast from "react-hot-toast";
+import { CiCalendar } from "react-icons/ci";
 
 const NoteCard = ({ note, setNotes }) => {
   const navigate = useNavigate();
@@ -31,63 +32,47 @@ const NoteCard = ({ note, setNotes }) => {
   };
 
   return (
-    <div className="group relative">
+    <>
       <Link
         to={`/note/${note._id}`}
-        className="block bg-white dark:bg-gray-800 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 dark:border-gray-700 hover:border-blue-200 dark:hover:border-blue-800"
+        className="card bg-base-100 hover:shadow-lg transition-all duration-200 
+      border-t-4 border-solid border-[#7480ff]"
       >
-        {/* Gradient Top Bar */}
-        <div className="h-1.5 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500"></div>
-        
-        <div className="p-5">
-          {/* Title */}
-          <h3 className="text-lg font-bold text-gray-800 dark:text-white mb-2 line-clamp-1 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
-            {note.title || "Untitled"}
-          </h3>
-          
-          {/* Content Preview */}
-          <p className="text-gray-500 dark:text-gray-400 text-sm line-clamp-3 mb-4 leading-relaxed">
-            {note.content || "No content"}
-          </p>
-          
-          {/* Footer */}
-          <div className="flex items-center justify-between mt-2">
-            {/* Date */}
-            <div className="flex items-center gap-1.5">
-              <svg className="w-3.5 h-3.5 text-gray-400 dark:text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-              </svg>
-              <span className="text-xs text-gray-400 dark:text-gray-500">
+        <div className="card-body">
+          <h3 className="card-title text-base-content">{note.title}</h3>
+          <p className="text-base-content/70 line-clamp-3">{note.content}</p>
+          <div className="note-bottom card-actions justify-between items-center mt-4">
+            <div className="note-date flex justify-evenly items-center">
+              <CiCalendar />
+              <span className="text-sm text-base-content/60 display-flex">
                 {formatDate(new Date(note.createdAt))}
               </span>
             </div>
-            
+
             {/* Action Buttons */}
             <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-              {/* Edit Button */}
-              <button
-                className="p-2 text-gray-500 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400 transition-colors rounded-lg hover:bg-blue-50 dark:hover:bg-blue-950"
-                onClick={(e) => handleEdit(e, note._id)}
-                aria-label="Edit note"
-                title="Edit"
-              >
-                <PenSquareIcon size={16} />
-              </button>
-              
+                {/* Edit Button */}
+                <button
+                  className="p-2 text-gray-500 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400 transition-colors rounded-lg hover:bg-blue-50 dark:hover:bg-blue-950"
+                  onClick={(e) => handleEdit(e, note._id)}
+                  aria-label="Edit note"
+                  title="Edit"
+                >
+                  <PenSquareIcon size={16} />
+                </button>
+
               {/* Delete Button */}
               <button
-                className="p-2 text-gray-500 hover:text-red-500 dark:text-gray-400 dark:hover:text-red-400 transition-colors rounded-lg hover:bg-red-50 dark:hover:bg-red-950"
+                className="btn btn-ghost btn-xs text-error"
                 onClick={(e) => handleDelete(e, note._id)}
-                aria-label="Delete note"
-                title="Delete"
               >
-                <Trash2Icon size={16} />
+                <Trash2Icon className="size-4" />
               </button>
             </div>
           </div>
         </div>
       </Link>
-    </div>
+    </>
   );
 };
 
