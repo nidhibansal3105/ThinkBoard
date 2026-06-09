@@ -1,5 +1,6 @@
 
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import { AuthProvider, useAuth } from "./context/AuthContext";
 import { ThemeProvider, useTheme } from "./context/ThemeContext";
 import ProtectedRoute from "./components/ProtectedRoute";
@@ -8,6 +9,7 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import HomePage from "./pages/HomePage";
 import CreatePage from "./pages/CreatePage";
+import MyNotes from "./pages/MyNotes";
 import NoteDetailPage from "./pages/NoteDetailPage";
 
 
@@ -68,6 +70,14 @@ const AppRoutes = () => {
           </ProtectedRoute>
         }
       />
+      <Route
+        path="/myNotes"
+        element={
+          <ProtectedRoute>
+            <MyNotes />
+          </ProtectedRoute>
+        }
+      />
 
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
@@ -78,13 +88,11 @@ const AppRoutes = () => {
 
 function App() {
   return (
-    <BrowserRouter>
       <AuthProvider>
         <ThemeProvider>
           <AppRoutes />
         </ThemeProvider>
       </AuthProvider>
-    </BrowserRouter>
   );
 }
 

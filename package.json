@@ -9,5 +9,10 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": ""
+  "description": "",
+  "dependencies": {
+    "lucide-react": "^1.17.0",
+    "react-hot-toast": "^2.6.0",
+    "react-router-dom": "^7.17.0"
+  }
 }
