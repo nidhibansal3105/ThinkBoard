@@ -1,30 +1,35 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import RateLimitedUI from "../components/RateLimitedUI";
-import { useEffect } from "react";
 import api from "../lib/axios";
 import toast from "react-hot-toast";
 import NoteCard from "../components/NoteCard";
 import NotesNotFound from "../components/NotesNotFound";
-import { Link } from "react-router";
-import { IoMdHome } from "react-icons/io";
+import { useAuth } from "../context/AuthContext";
 
 const MyNotes = () => {
+  const navigate = useNavigate();
+  const { user, loading: authLoading } = useAuth();
   const [isRateLimited, setIsRateLimited] = useState(false);
   const [notes, setNotes] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    if (!authLoading && !user) {
+      navigate("/login");
+      return;
+    }
+
     const fetchNotes = async () => {
       try {
         const res = await api.get("/notes");
-        console.log(res.data);
         setNotes(res.data);
         setIsRateLimited(false);
       } catch (error) {
-        console.log("Error fetching notes");
-        console.log(error.response);
         if (error.response?.status === 429) {
           setIsRateLimited(true);
+        } else if (error.response?.status === 401) {
+          navigate("/login");
         } else {
           toast.error("Failed to load notes");
         }
@@ -33,8 +38,22 @@ const MyNotes = () => {
       }
     };
 
-    fetchNotes();
-  }, []);
+    if (user) {
+      fetchNotes();
+    }
+  }, [user, authLoading, navigate]);
+
+  if (authLoading || loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-900 to-gray-800">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500"></div>
+      </div>
+    );
+  }
+
+  if (!user) {
+    return null;
+  }
 
   return (
     <div className="my-note-bg">
@@ -44,7 +63,6 @@ const MyNotes = () => {
         <div className="my-notes-navbar">
           <Link to="/" title="Home" className="pill-btn matt-effect"><IoMdHome /></Link>
         </div>
-        {loading && <div className="text-center text-primary py-10 ">Loading notes...</div>}
 
         {notes.length === 0 && !isRateLimited && <NotesNotFound />}
 
@@ -59,4 +77,5 @@ const MyNotes = () => {
     </div>
   );
 };
+
 export default MyNotes;
